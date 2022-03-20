@@ -7,7 +7,7 @@ output:
       fig_caption: True
       toc: True
       toc_depth: 2
-abstract: "This paper generally investigates the relationship between people’s current marriage time and age as well as whether they have children and whether it is their first marriage. By using dataset created by the Canadian 2017 General Social Survey (GSS), we construct some main variables and create histograms analyzing the distribution of the marriage time and age difference. Also, two scatter plots have been drawn to show the relationship between marriage time and difference age related components. At last, two box plots have been drawn to compare the medium of marriage time between whether they have children and whether they are in their first marriage. By further creation of the scatter plots and multiple linear regression model, we find that variables age of respondent, age of respondent when they got married and whether they have children have will affect the marriage time."
+abstract: "This paper generally investigates the relationship between people’s current marriage time and age as well as whether they have children and whether it is their first marriage. By using dataset created by the Canadian 2017 General Social Survey (GSS), we construct some main variables and create histograms analyzing the distribution of the marriage time and age difference. Also, two scatter plots have been drawn to show the relationship between marriage time and difference age related components. At last, two box plots have been drawn to compare the medium of marriage time between whether they have children and whether they are in their first marriage. By further creation of the scatter plots and multiple linear regression model, we find that variables age of respondent, age of respondent when they got married and whether they have children have will affect the marriage time.^[https://github.com/YilinLan/STA304Paper3]"
 bibliography: ref_list.bib
 ---
 
@@ -38,7 +38,7 @@ By using dataset created by the Canadian 2017 General Social Survey (GSS), we co
 
 Furthermore, we construct scatter plot showing the relationship between marriage time and age at start of marriage and divided them by whether they have children. Also, a scatter plot showing the relationship between marriage time and age at start of current marriage and group by whether it is their first marriage. We find that those who have children generally have longer duration of marriage than those who don’t have children. For respondents who start current marriage above 37 years old, those who have children generally have shorter duration of marriage than those who don’t have children. At last, we construct a multiple linear regression model and find that variables age of respondent, age of respondent when they got married and whether they have children have will affect the marriage time.\
 
-All the data analysis in this paper uses R studio [@F] with tidyverse [@B], patchwork [@E], ggplot2 [@D] , kableExtra [@A] and dplyr [@C] packages.
+All the data analysis in this paper uses R studio [@F] with tidyverse [@B], patchwork [@E], ggplot2 [@D] , kableExtra [@A] and dplyr [@C] packages.^[https://github.com/YilinLan/STA304Paper3]
 
 \newpage
 # Data
@@ -53,8 +53,9 @@ The questionnaire included all the age group people and asked very specific ques
 We select the following variables from the dataset for our investigation: \
 1. current_marriage_time (response variable): the total marriage time of respondent current marriage. We want to investigate the relationship between current marriage time and age. So that we choose these two variables, ASEPMA0C: Age of respondent at time of separation at current marriage, and AGEMA0C: Age of respondent at the start of current marriage. Then we take the difference between them and get the new variable called current_marriage_time.\
 
-Other important numerical explanatory variables include:\
-2. age_respondent: age of respondent at time of the survey interview. The original variable name is AGEC. \
+Other important numerical explanatory variables include:^[https://github.com/YilinLan/STA304Paper3]
+
+2. age_respondent: age of respondent at time of the survey interview. The original variable name is AGEC.
 3. ageofmarriage_respondent: age of respondent at the start of current marriage. The original variable name is AGEMA0C.\
 4. age_difference: the age difference between respondent and respondent’s spouse. We take the difference between variable aprma0c: age of respondent’s spouse at start of current marriage and variable agema0c: age of respondent at start of current marriage.\
 
@@ -64,7 +65,7 @@ We also choose 2 dummy explanatory variables to discuss different conditions in 
 
 In the process of data cleaning, all "valid skip", "Don't know", "Refusal" and "Not stated" value in the survey answer are removed. For the variable age_difference, we only select observations that has age_difference less than 20 since those small number of observations with age_difference larger than 20 are leverage points which could influence our linear model outcome too much.\
 
-There is no similar dataset because this survey was conducted from February 2nd to November 30th 2017. It takes a long time to collect the data and it include a large number of populations. The survey is not conducted every year so that there is almost no similar dataset.\
+There is no similar dataset because this survey was conducted from February 2nd to November 30th 2017. It takes a long time to collect the data and it include a large number of populations. The survey is not conducted every year so that there is almost no similar dataset.^[https://github.com/YilinLan/STA304Paper3]
 
 ## Data visualization
 
@@ -107,9 +108,9 @@ graph3<-clean_data %>% ggplot(aes(x=age_respondent,y=current_marriage_time))+geo
    
 ```
 
-By drawing the scatter plot \@ref(fig:fig4) between the marriage time and the age of respondent, the distribution of the relationship between these two factors could be demonstrated. According to the scatter plot between the marriage time and the age of respondent, we could see that there is a positive correlation between these two variables, which make sense in real life, so that our sample is solid for further analysis.
+By drawing the scatter plot \@ref(fig:fig4) between the marriage time and the age of respondent, the distribution of the^[https://github.com/YilinLan/STA304Paper3] relationship between these two factors could be demonstrated. According to the scatter plot between the marriage time and the age of respondent, we could see that there is a positive correlation between these two variables, which make sense in real life, so that our sample is solid for further analysis.
 
-\newpage
+
 ```{r fig5,echo=FALSE,message=FALSE,warning=FALSE, fig.cap = "Boxplots showing the medium difference between marriage time and different categorical variables",fig.height=4,fig.width=7}
 graph4<-clean_data %>% ggplot(aes(x=is_first_marriage,y=current_marriage_time))+geom_boxplot(fill="blue")+theme_classic()+labs(x="First marriage or not",y="Marriage time",title = "Marriage time vs. First marriage or not")+theme(plot.title = element_text(size=10))
 
@@ -123,7 +124,7 @@ graph4+graph5
 
 According to the Figure \@ref(fig:fig5) between marriage time and first marriage or not, we could see the difference of our sample between first marriage and not first marriage and the distribution of marriage time of these two types of marriage. For respondents who are in a first marriage, a median marriage time of 12 years is shown in the boxplot, and the more precise concentration of marriage time is from 6 years to 12 years. For respondents who are not in a first marriage, a median marriage time of 6 years is revealed, and the concentration of marriage time is from 4 years to 9 years, with several outliers indicating marriage time more than 25 years.\
 
-Similarly, the Figure \@ref(fig:fig5) between marriage time and having children or not could illustrate the difference of our sample between having children or not having children and the distribution of marriage time of these two conditions. For respondents who are having children, a median marriage time of 13 years is revealed, and the marriage time is concentrated from 8 years to 12 years. For respondents who are not having children, a median marriage time of 6 years is demonstrated, and the concentration of marriage time in this case is from 4 years to 6 years, with several outliers of more than 23 years.\
+Similarly, the Figure \@ref(fig:fig5) between marriage time and having children or not could illustrate the difference of our sample between having children or not having children and the distribution of marriage time of these two conditions. For respondents who are having children, a median marriage time of 13 years is revealed, and the marriage time is concentrated from 8 years to 12 years. For respondents who are not having children, a median marriage time of 6 years is demonstrated, and the concentration of marriage time in this case is from 4 years to 6 years, with several outliers of more than 23 years.^[https://github.com/YilinLan/STA304Paper3]
 
 \newpage
 # Result
@@ -152,7 +153,7 @@ plot1+plot_annotation(title="Marriage time by Age difference between respondent 
 
 By creating these two scatter plots \@ref(fig:fig6) between marriage time and age difference, we can see a negative relationship. The graph on the left hand side shows the linear relationship with condition first marriage or not. The red line in the graph on the left hand side represent the group whose marriage is first marriage while the blue line represent the group whose marriage is not first marriage. From the fitted line on the scatterplot we can see that if the respondent is in the first marriage, their average marriage time is longer than the respondents who are not in the first marriage. The graph on the right hand side shows the linear relationship with condition having children or not. The red line in the graph on the right hand side represent the group who have children while the blue line represent the group who don't have children. By linear regression, the fitted line tells that couple have children generally have longer marriage duration than those who don't have children. \
 
-Over all, in general, we can conclude from both graph that when the age difference is smaller, couples' marriage time would be generally longer than the couples who have larger age difference under all the circumstances. Moreover, when couple don't have children, the line is very flat. Thus, it is quite interesting to see that when the couple don't have children born or adopted, the age difference is not a factor which affects marriage time much.
+Over all, in general, we can conclude from both graph that when the age difference is smaller, couples' marriage time would be generally longer than the couples who have larger age difference under all the circumstances. Moreover, when couple don't have children, the line is very flat. Thus, it is quite interesting to see that when the couple don't have children born or adopted, the age difference is not a factor which affects marriage time much.^[https://github.com/YilinLan/STA304Paper3]
 
 \newpage
 ```{r fig7,echo=FALSE, message=FALSE,warning=FALSE, fig.cap = "Scatterplots showing the relationship between marriage time and different age components with different categorical variables",fig.height=4}
@@ -177,7 +178,7 @@ plot2+plot_annotation(title="Marriage time by Age of respondent")&theme(plot.tit
 
 ```
 
-In this case, by constructing these two scatter plots \@ref(fig:fig7) between marriage time and age of respondents with conditions of first marriage or not and having children or not, the relationship between these two variables is clearly illustrated. The graph on left hand side discusses the linear relationship under circumstances that current marriage is first marriage or not while graph on left hand side discuss circumstances that couple have children or not. In this case, on both graphs, with the increase of the age of respondent, the marriage time of respondent are increasing as well, which make sense in real life. For same age respondents, those respondents who are in their first marriage generally have longer duration of marriage than those respondents who are not in their first marriage. Moreover, For same age respondents, those who have children generally have longer marriage time as well than those who don't have children. \
+In this case, by constructing these two scatter plots \@ref(fig:fig7) between marriage time and age of respondents with conditions of first marriage or not and having children or not, the relationship between these two variables is clearly illustrated. The graph on left hand side discusses the linear relationship under circumstances that current marriage is first marriage or not while graph on left hand side discuss circumstances that couple have children or not. In this case, on both graphs, with the increase of the age of respondent, the marriage time of respondent are increasing as well, which make sense in real life. For same age respondents, those respondents who are in their first marriage generally have longer duration of marriage than those respondents who are not in their first marriage. Moreover, For same age respondents, those who have children generally have longer marriage time as well than those who don't have children.^[https://github.com/YilinLan/STA304Paper3]
 
 \newpage
 ```{r fig8,echo=FALSE,message=FALSE,warning=FALSE, fig.cap = "Scatterplots showing the relationship between marriage time and age at start of marriage with different categorical variables", fig.height=4}
@@ -208,7 +209,7 @@ These two scatter plots \@ref(fig:fig8) between marriage time and respondent's a
 Meanwhile, from the graph on the right hand side we can see that for respondents who start current marriage under 35 years old, those whose current marriage is their first marriage generally have longer duration of marriage than those who are not in their first time marriage. However, For respondents who start current marriage above 35 years old, those whose current marriage is their first marriage generally have shorter duration of marriage than those who are not in their first time marriage. Here, the gap between 2 group first marriage and not first marriage is not that large as the gap between group have children or not in graph on the left. This imply that the affect of factor first marriage on marriage time or not is not as large as the factor have children or not.\
 
 ## Model
-Here, to have a better view on the whole picture of our research problem, we build a multiple linear regression model which conveys the relationship between marriage time and all explanatory variables we considered in our research including age of respondent, have children or not, first marriage or not, age difference between respondent and spouse and age of respondent at start of marriage. The equation of the model is shown as below:\
+Here, to have a better view on the whole picture of our research problem, we build a multiple linear regression model which conveys the relationship between marriage time and all explanatory variables we considered in our research including age of respondent, have children or not, first marriage or not, age difference between^[https://github.com/YilinLan/STA304Paper3] respondent and spouse and age of respondent at start of marriage. The equation of the model is shown as below:\
 $(current\_marriage\_time)_i=\beta_0+\beta_1(age\_respondent)_i+\beta_2(children_born)_i+\beta_3(is\_first\_marriage)_i+\beta_4(age\_difference)_i+\beta_5(ageofmarriage\_respondent)_i+\epsilon_i$
 
 where:\
@@ -232,7 +233,7 @@ As age of respondent increases by 1 unit, the mean duration of marriage increase
 
 The estimated coefficient value for two dummy variables in the model show the difference between groups. The estimated value of $\beta_2$ is -2.2193054. This means that on average the difference between group "have children" and group "not have children" is 2.2193054. This value means that the predicted marriage duration for couples who have children is 2.2193054 years longer than couples who don't have children with all else been constant. On the other hand, The estimated value of $\beta_3$ is -0.3762604. This means that on average the difference between group "first marriage" and group "not first marriage" is 0.3762604. It is predicted that the marriage duration for respondent whose current marriage is whose first marriage is 0.3762604 years longer than respondent whose current marriage is not whose first marriage with all else been constant. This reflects the same result as scatter plots we have above. Couples who have children and whose current marriage is their first marriage tend to have longer marriage time.\
 
-What's more, the p-value conducting by hypothesis test on each variable shows the significance of each explanatory variable in this model. Here, variable age_respondent, ageofmarriage_respondent and children_born all have p-value less that 0.05, which shows that these predictors are statically significant in this model. In contrast, variable age_difference and is_first_marriage has p-value larger than 0.05, which shows that these two variable are not statistically significant in this model. Thus, we could deduct that the age difference of couple and if the marriage is the first marriage does not affect marriage duration much. \
+What's more, the p-value conducting by hypothesis test on each variable shows the significance of each explanatory variable in this model. Here, variable age_respondent, ageofmarriage_respondent and children_born all have p-value less that 0.05, which shows that these predictors are statically significant in this model. In contrast, variable age_difference and is_first_marriage has p-value larger than 0.05, which shows that these two variable are not statistically significant in this model. Thus, we could deduct that the age difference of couple and if the marriage is the first marriage does not affect marriage duration much.^[https://github.com/YilinLan/STA304Paper3]
 
 \newpage
 # Discussion
@@ -249,7 +250,7 @@ Second, we create two scatter plots to show the relationship between the marriag
 According to the linear regression model, the scatterplots we made previously, our research question could be discussed. Due to the fact that the sample we analyzed are currently separated couples, we have avoided the influence of respondent's age when conducting our data analysis. Since all couples investigated are in a seperation status, the duration of their marriage is not directly related to their age. Thus, these results truly reflect some marital issues in real life.
 
 ### Having Children, Age of respondent and age at start of marriage
-From our analysis result, we find that in general, couples that have children born or adopted have longer duration of marriage. This make sense in our real life. According to the Article Psychosocial Factors That Influence Marital Couple Duration, children are negatively affected by divorce, both psychologically and socially [@G]. Nowadays, divorce become more and more common, and the divorce itself could be traumatic, not only for the couples, but also for their friends and children. For marital couples who are having children, children may become their representation and link of the marriage. If they divorce, their children will suffer from lots of pressure, like psychological pressure or financial pressure. Consequently, couples with children would be harder to decide to separate because of the existence of this link. On the other hand, according to the article of How to Manage the Higher Risk of Divorce When Baby Come Along, 67% percent of couples show a decline in satisfaction of marriage life after the arrival of the first baby [@I]. This phenomenon is easy to understand because the arrival of the first baby will make the marital life be more complicated, and things that would disturb the original marital life will occur as well.\
+From our analysis result, we find that in general, couples that have children born or adopted have longer duration of marriage. This make sense in our real life. According to the Article Psychosocial Factors That Influence Marital Couple Duration, children are negatively affected by divorce, both psychologically and socially [@G]. Nowadays, divorce become more and more common, and the divorce^[https://github.com/YilinLan/STA304Paper3] itself could be traumatic, not only for the couples, but also for their friends and children. For marital couples who are having children, children may become their representation and link of the marriage. If they divorce, their children will suffer from lots of pressure, like psychological pressure or financial pressure. Consequently, couples with children would be harder to decide to separate because of the existence of this link. On the other hand, according to the article of How to Manage the Higher Risk of Divorce When Baby Come Along, 67% percent of couples show a decline in satisfaction of marriage life after the arrival of the first baby [@I]. This phenomenon is easy to understand because the arrival of the first baby will make the marital life be more complicated, and things that would disturb the original marital life will occur as well.\
 
 Moreover, from our result, we find that age of respondent have positive relationship with duration of marriage. Elder people in our sample tend to have longer duration of marriage. This reflect the reality as well. With the longer time of the marriage, the marital issues within couples could be digested more. Additionally, the age of respondent starting their marriage is also influencing the marriage time. Based on our data analysis, we find that there is negative linear relationship between marriage time and age of respondent starting their marriage. We deduct that the reason behind may be when people are very old, they tend to be in the saperation status in their marriage. Thus, for those people who start marriage late, their marriage duration is shorter compare to those who start marriage when they are young. What's more, we find that for respondents who start current marriage under 37 years old, those who have children generally have longer duration of marriage than those who don’t have children. This is very interesting and we haven't find a reasonable explanation for this phenomenon. According to the article of What Is The Right Age To Get Married, the most appropriate age to get married and avoid divorcing in 5 years is around 28 years old to 32 years old.  It makes sense as well, because 28 years old to 32 years old is an age that people could truly understand the difference between mature love and puppy love.\
 
@@ -258,7 +259,7 @@ According to the summary table of linear mixed model we built, the p-values of e
 
 Although the result of our model indicate that whether the respondent is in a first marriage or not is not a main factor that influence the duration of the marriage, according to the article of How Long Does the Average Marriage Last, the duration of the first marriage in USA is only 7 years, and most people who divorce in first marriage has 60 percentage of probability to divorce in the second one, and 73 percentage for a third marriage [@J]. It is astonishing that, nowadays, the duration of marriage wound not last for a long time for some of the couples in USA, and the second marriage will not probably last for a long time as well. In real life, The factor of whether respondent is in a first marriage or not is going to influence duration of marriage as well.\
 
-As for the factor age difference, according to the scientific article Age difference at marriage and divorce, indeed, the age difference in a marriage isn’t a crucial factor of divorce [@G]. It makes sense in real life, because age difference is a factor of deciding to get married or not, but not a factor of deciding to divorce. According to the article of What Is A Best Age Difference For A Successful Marriage, it states that age gaps work differently on different couples. Some people will feel right with an age gap of 2 years, while some are looking for an age gap of 10 years [@K]. Indeed, the age gap seems to be an induvial stuff for different couples.\
+As for the factor age difference, according to the scientific article Age difference at marriage and divorce, indeed, the age difference in a marriage isn’t a crucial factor of divorce [@G]. It makes sense in real life, because age difference is a factor of deciding to get married or not, but not a factor of deciding to divorce. According to the article of What Is A Best Age Difference For A Successful Marriage, it states that age gaps work differently on different couples. Some people will feel right with an age gap of 2 years, while some are looking for an age gap of 10 years [@K]. Indeed, the age gap seems to be an induvial stuff for different couples.^[https://github.com/YilinLan/STA304Paper3]
  
 ## Weekness of this paper
 There are some limitations in the data. First, the sample data we have is obtained from survey. The survey is answered voluntarily. So we cannot ensure the accuracy of the data collected. Second, there are non-response problem in the survey. \
@@ -268,7 +269,7 @@ There are also lots of limitations in our regression model. First of all, the va
 ## Next Step
 For the further study, we plan to expand our model to include more considerable variables that may influence the duration of marriage. Moreover, instead of only focuse on the duration of marriage, we want to set some criteria in order to measure the quality of a marriage. For example, how happy are the couples in the marriage. This require more information on respondent's personal life and highly depend on responden't mood and personal feelings. Thus, to find a good way to colloct these private information could be a big barrier for furture analysis on this research problem.\
 
-What's more we could analysis on children of one family or children in one marriage. By analyzing the children number, children's education level and some more information collected, our further discussion could focus more on the relation ship between children and marriage. Children age, children number, children have pet or not and the reason why have children are all considerable variables of interest for our further study.
+What's more we could analysis on children of one family or children in one marriage. By analyzing the children number, children's education level and some more information collected, our further discussion could focus more on the relation ship between children and marriage. Children age, children number, children have pet or not and the reason why have children are all considerable variables of interest for our further study.^[https://github.com/YilinLan/STA304Paper3]
 
 \newpage
 # Appendix
@@ -324,7 +325,7 @@ I. Refusal\
 A. Lower than elementary school\
 B. Elementary school\
 C. Middle school\
-D. High school\
+D. High school^[https://github.com/YilinLan/STA304Paper3]\
 E. Undergraduate\
 F. Graduate\
 G. Higher than graduate\
@@ -379,8 +380,8 @@ D. Refusal\
 E. Valid skip\
 
 An URL for the supplementary survey: https://forms.gle/sXo2h5nDp51ekVos6
-Thanks for answering the above questions and your answers will definitely help us on the research.
+Thanks for answering the above questions and your answers will definitely help us on the research.^[https://github.com/YilinLan/STA304Paper3]
 
 \newpage
-# Reference
+# Reference^[https://github.com/YilinLan/STA304Paper3]
 
